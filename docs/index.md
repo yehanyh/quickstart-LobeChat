@@ -49,8 +49,8 @@ LobeChat是现代化设计的开源 ChatGPT/LLMs 聊天应用与开发框架
 2. 填写实例参数![](./img/param1.png)
 3. 填写网络参数并点击“下一步：确认订单”![](./img/param2.png)
 4. 点击立即创建，等待服务实例部署完成![](./img/param3.png)
-5. 服务实例部署完成后，点击实例ID进入到详情界面![](./img/serviceinstance1.png)
-6. 访问服务实例的使用URL![](./img/serviceinstance2.png)
+5. 服务实例部署完成后，点击实例ID进入到详情界面![](./img/serviceInstance1.png)
+6. 访问服务实例的使用URL![](./img/serviceInstance2.png)
 7. 进入到LobeChat应用界面，并配置您使用模型的API Key![](./img/lobechat.png)
 8. 开始使用LobeChat！
 
