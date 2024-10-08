@@ -27,7 +27,7 @@ LobeChat是现代化设计的开源 ChatGPT/LLMs 聊天应用与开发框架
 + <font style="color:rgb(51, 51, 51);">公网带宽</font>
 
 ## <font style="color:rgb(51, 51, 51);">部署架构</font>
-![](https://intranetproxy.alipay.com/skylark/lark/0/2024/png/63156287/1728371950788-fa2a68da-f66a-4630-8324-8660f11cf55b.png)
+![](./img/deploy.png)
 
 
 
@@ -46,11 +46,11 @@ LobeChat是现代化设计的开源 ChatGPT/LLMs 聊天应用与开发框架
 
 ## <font style="color:rgb(51, 51, 51);">部署流程</font>
 1. 访问计算巢LobeChat[部署链接](https://computenest.console.aliyun.com/service/instance/create/cn-hangzhou?type=user&ServiceId=service-d53df8245f304dedb2a4)，按提示填写部署参数
-2. 填写实例参数![](https://intranetproxy.alipay.com/skylark/lark/0/2024/png/63156287/1728368685902-fea9bc47-c7a4-4c31-b852-62576b3578a9.png)
-3. 填写网络参数并点击“下一步：确认订单”![](https://intranetproxy.alipay.com/skylark/lark/0/2024/png/63156287/1728368715524-d1334fac-5076-42a2-8230-751f9ba11aec.png)
-4. 点击立即创建，等待服务实例部署完成![](https://intranetproxy.alipay.com/skylark/lark/0/2024/png/63156287/1728368776132-3fc96ff1-9e63-48bd-81a9-f2d463a5d460.png)
-5. 服务实例部署完成后，点击实例ID进入到详情界面![](https://intranetproxy.alipay.com/skylark/lark/0/2024/png/63156287/1728368836815-fc082972-fd2f-495b-bdbb-bea8598965e1.png)
-6. 访问服务实例的使用URL![](https://intranetproxy.alipay.com/skylark/lark/0/2024/png/63156287/1728368892407-7cb4ed27-4a37-4702-a1a8-bded90a6a75c.png)
-7. 进入到LobeChat应用界面，并配置您使用模型的API Key![](https://intranetproxy.alipay.com/skylark/lark/0/2024/png/63156287/1728373469520-b2e4d5a2-9878-4f91-91e6-a416ef7ae3aa.png)
+2. 填写实例参数![](./img/param1.png)
+3. 填写网络参数并点击“下一步：确认订单”![](./img/param2.png)
+4. 点击立即创建，等待服务实例部署完成![](./img/param3.png)
+5. 服务实例部署完成后，点击实例ID进入到详情界面![](./img/serviceinstance1.png)
+6. 访问服务实例的使用URL![](./img/serviceinstance2.png)
+7. 进入到LobeChat应用界面，并配置您使用模型的API Key![](./img/lobechat.png)
 8. 开始使用LobeChat！
 
