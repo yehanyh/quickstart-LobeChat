@@ -4,7 +4,7 @@ Service:
   DeployMetadata:
     SupplierDeployMetadata:
       FileArtifactRelation:
-        '{{ computenest::file::aliyun-computenest_quickstart-LobeChat }}':
+        '{{ computenest::file::aliyun-computenest_quickstart-LobeChat-docker-compose }}':
           ArtifactId: ${Artifact.Artifact_1.ArtifactId}
           ArtifactVersion: ${Artifact.Artifact_1.ArtifactVersion}
     TemplateConfigs:
@@ -18,12 +18,12 @@ Service:
   ServiceType: private
   ServiceInfo:
     Locale: zh-CN
-    ShortDescription: demo
+    ShortDescription: docker compose deploy
     Image: 'resources/icons/service_logo.png'
 Artifact:
   Artifact_1:
     ArtifactType: File
-    ArtifactName: aliyun-computenest_quickstart-LobeChat
+    ArtifactName: aliyun-computenest_quickstart-LobeChat-docker-compose
     ArtifactProperty:
       RegionId: cn-hangzhou
-      Url: 'resources/artifact_resources/file/aliyun-computenest_quickstart-LobeChat.tar.gz'
+      Url: 'resources/artifact_resources/docker_compose.tar'
