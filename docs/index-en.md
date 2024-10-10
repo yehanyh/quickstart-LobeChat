@@ -142,8 +142,8 @@
     <li> Fill in the network parameters and click "Next: Confirm Order" <img src="./img-en/param2.png" alt=""/></li>
     <li> Click Create Now and wait for the service instance deployment to complete <img src="./img-en/param3.png" alt=""/>
     </li>
-    <li> After the service instance is deployed, click the instance ID to go to the details page <img
-            src="./img-en/serviceInstance1.png" alt=""/></li>
+    <li> After the service instance is deployed, click the instance ID to go to the details page <img src="./img-en/serviceInstance1.png" alt=""/>
+    </li>
     <li> Use the URL to access the service instance <img src="./img-en/serviceInstance2.png" alt=""/></li>
     <li> Go to the LobeChat application interface and configure the API Key<img src="./img-en/lobechat.png" alt=""/></li>
     for the model.
