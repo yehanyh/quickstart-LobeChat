@@ -25,35 +25,35 @@
 
 <h2> Prerequisites </h2>
 
-<p><font style="color:white;"> To deploy a Dify Community Edition service instance, you need to access and
+<p><font style="color:black;"> To deploy a Dify Community Edition service instance, you need to access and
     create some Alibaba Cloud resources. Therefore, your account must contain permissions for the following
-    resources. </font><font style="color:white;"> </font><strong><font style="color:white;">
+    resources. </font><font style="color:black;"> </font><strong><font style="color:black;">
     Description </font></strong><font style="color:rgb(51, 51>: 51);">: this permission is required only when your account is a RAM account. </font></p>
 
 <table>
 <thead>
 <tr>
-    <th><font style="color:white;"> Permission policy name </font></th>
-    <th><font style="color:white;"> Remarks </font></th>
+    <th><font style="color:black;"> Permission policy name </font></th>
+    <th><font style="color:black;"> Remarks </font></th>
     </tr>
     </thead>
     <tbody>
     <tr>
-        <td><font style="color:white;">AliyunECSFullAccess</font></td>
-        <td><font style="color:white;"> Permissions to manage ECS </font></td>
+        <td><font style="color:black;">AliyunECSFullAccess</font></td>
+        <td><font style="color:black;"> Permissions to manage ECS </font></td>
     </tr>
     <tr>
-        <td><font style="color:white;">AliyunVPCFullAccess</font></td>
-        <td><font style="color:white;"> Permissions to manage a VPC </font></td>
+        <td><font style="color:black;">AliyunVPCFullAccess</font></td>
+        <td><font style="color:black;"> Permissions to manage a VPC </font></td>
     </tr>
     <tr>
-        <td><font style="color:white;">AliyunROSFullAccess</font></td>
-        <td><font style="color:white;"> Manage permissions for the Resource Orchestration Service
+        <td><font style="color:black;">AliyunROSFullAccess</font></td>
+        <td><font style="color:black;"> Manage permissions for the Resource Orchestration Service
             (ROS) </font></td>
     </tr>
     <tr>
-        <td><font style="color:white;">AliyunComputeNestUserFullAccess</font></td>
-        <td><font style="color:white;"> Manage user-side permissions for the compute nest service
+        <td><font style="color:black;">AliyunComputeNestUserFullAccess</font></td>
+        <td><font style="color:black;"> Manage user-side permissions for the compute nest service
             (ComputeNest) </font></td>
     </tr>
     </tbody>
@@ -61,13 +61,13 @@
 
 <h2> Billing instructions </h2>
 
-<p><font style="color:white;"> The cost of LobeChat community edition deployment in computing nest mainly
+<p><font style="color:black;"> The cost of LobeChat community edition deployment in computing nest mainly
     involves:</font></p>
 
 <ul>
-    <li><font style="color:white;"> selected vCPU and memory specifications </font></li>
-    <li><font style="color:white;"> System disk type and capacity </font></li>
-    <li><font style="color:white;"> Internet bandwidth </font></li>
+    <li><font style="color:black;"> selected vCPU and memory specifications </font></li>
+    <li><font style="color:black;"> System disk type and capacity </font></li>
+    <li><font style="color:black;"> Internet bandwidth </font></li>
 </ul>
 
 <h2> Deployment Architecture </h2>
@@ -79,54 +79,54 @@
 <table>
     <thead>
     <tr>
-        <th><font style="color:white;"> parameter group </font></th>
-        <th><font style="color:white;"> parameter items </font></th>
-        <th><font style="color:white;"> Description </font></th>
+        <th><font style="color:black;"> parameter group </font></th>
+        <th><font style="color:black;"> parameter items </font></th>
+        <th><font style="color:black;"> Description </font></th>
     </tr>
     </thead>
     <tbody>
     <tr>
-        <td><font style="color:white;"> Service instance </font></td>
-        <td><font style="color:white;"> Service instance name </font></td>
-        <td><font style="color:white;"> No more than 64 characters in length, must start with an English
+        <td><font style="color:black;"> Service instance </font></td>
+        <td><font style="color:black;"> Service instance name </font></td>
+        <td><font style="color:black;"> No more than 64 characters in length, must start with an English
             letter, and can contain numbers, English letters, dashes (-), and underscores (_)</font></td>
     </tr>
     <tr>
         <td></td>
-        <td><font style="color:white;"> Region </font></td>
-        <td><font style="color:white;"> Region where the service instance is deployed </font></td>
+        <td><font style="color:black;"> Region </font></td>
+        <td><font style="color:black;"> Region where the service instance is deployed </font></td>
     </tr>
     <tr>
         <td></td>
-        <td><font style="color:white;"> Payment type </font></td>
-        <td><font style="color:white;"> Resource billing type: Pay-As-You-Go and Subscription </font></td>
+        <td><font style="color:black;"> Payment type </font></td>
+        <td><font style="color:black;"> Resource billing type: Pay-As-You-Go and Subscription </font></td>
     </tr>
     <tr>
-        <td><font style="color:white;">ECS instance configuration </font></td>
-        <td><font style="color:white;"> instance type </font></td>
-        <td><font style="color:white;"> Instance specifications available in the Availability Zone </font>
+        <td><font style="color:black;">ECS instance configuration </font></td>
+        <td><font style="color:black;"> instance type </font></td>
+        <td><font style="color:black;"> Instance specifications available in the Availability Zone </font>
         </td>
     </tr>
     <tr>
         <td></td>
-        <td><font style="color:white;"> Instance password </font></td>
-        <td><font style="color:white;"> is 8-30 in length and must contain three items (uppercase letters,
+        <td><font style="color:black;"> Instance password </font></td>
+        <td><font style="color:black;"> is 8-30 in length and must contain three items (uppercase letters,
             lowercase letters, numbers, ()'~! @#$%^&*-+=<{}[]:;'<>,. special symbols in?/)</font></td>
     </tr>
     <tr>
-        <td><font style="color:white;"> Network Configuration </font></td>
-        <td><font style="color:white;"> Availability Zone </font></td>
-        <td><font style="color:white;"> Zone where the ECS instance is located </font></td>
+        <td><font style="color:black;"> Network Configuration </font></td>
+        <td><font style="color:black;"> Availability Zone </font></td>
+        <td><font style="color:black;"> Zone where the ECS instance is located </font></td>
     </tr>
     <tr>
         <td></td>
-        <td><font style="color:white;">VPC ID</font></td>
-        <td><font style="color:white;"> VPC where the resource is located </font></td>
+        <td><font style="color:black;">VPC ID</font></td>
+        <td><font style="color:black;"> VPC where the resource is located </font></td>
     </tr>
     <tr>
         <td></td>
-        <td><font style="color:white;"> Switch ID</font></td>
-        <td><font style="color:white;"> Switch where the resource is located </font></td>
+        <td><font style="color:black;"> Switch ID</font></td>
+        <td><font style="color:black;"> Switch where the resource is located </font></td>
     </tr>
     </tbody>
 </table>
