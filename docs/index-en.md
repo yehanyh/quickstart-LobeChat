@@ -72,7 +72,7 @@
 
 <h2> Deployment Architecture </h2>
 
-<p><img src="./img/deploy.png" alt=""/></p>
+<p><img src="./img-en/deploy.png" alt=""/></p>
 
 <h2> Parameter description </h2>
 
@@ -138,14 +138,14 @@
             href="https://computenest.console.aliyun.com/service/instance/create/default?type=user&ServiceName=LobeChat%E7%A4%BE%E5%8C%BA%E7%89%88">
         deployment link </a> and fill in the deployment parameters as prompted
     </li>
-    <li> Fill in the instance parameters <img src="./img/param1.png" alt=""/></li>
-    <li> Fill in the network parameters and click "Next: Confirm Order" <img src="./img/param2.png" alt=""/></li>
-    <li> Click Create Now and wait for the service instance deployment to complete <img src="./img/param3.png" alt=""/>
+    <li> Fill in the instance parameters <img src="./img-en/param1.png" alt=""/></li>
+    <li> Fill in the network parameters and click "Next: Confirm Order" <img src="./img-en/param2.png" alt=""/></li>
+    <li> Click Create Now and wait for the service instance deployment to complete <img src="./img-en/param3.png" alt=""/>
     </li>
     <li> After the service instance is deployed, click the instance ID to go to the details page <img
-            src="./img/serviceInstance1.png" alt=""/></li>
-    <li> Use the URL to access the service instance <img src="./img/serviceInstance2.png" alt=""/></li>
-    <li> Go to the LobeChat application interface and configure the API Key<img src="./img/lobechat.png" alt=""/></li>
+            src="./img-en/serviceInstance1.png" alt=""/></li>
+    <li> Use the URL to access the service instance <img src="./img-en/serviceInstance2.png" alt=""/></li>
+    <li> Go to the LobeChat application interface and configure the API Key<img src="./img-en/lobechat.png" alt=""/></li>
     for the model.
     <li> Get started with LobeChat!</li>
 </ol>
