@@ -47,7 +47,7 @@ LobeChat是现代化设计的开源 ChatGPT/LLMs 聊天应用与开发框架
 ## 部署流程
 1. 访问计算巢LobeChat[部署链接](https://computenest.console.aliyun.com/service/instance/create/default?type=user&ServiceName=LobeChat%E7%A4%BE%E5%8C%BA%E7%89%88)，按提示填写部署参数
 2. 填写实例参数![](./img/param1.png)
-3. 填写网络参数并点击“下一步：确认订单”![](./img/param2.png)
+3. 填写可用区和网络参数并点击“下一步：确认订单”![](./img/param2.png)
 4. 点击立即创建，等待服务实例部署完成![](./img/param3.png)
 5. 服务实例部署完成后，点击实例ID进入到详情界面![](./img/serviceInstance1.png)
 6. 访问服务实例的使用URL![](./img/serviceInstance2.png)
