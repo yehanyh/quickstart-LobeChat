@@ -2,7 +2,71 @@ ROSTemplateFormatVersion: '2015-09-01'
 Description:
   en: DockerCompose service template
   zh-cn: DockerCompose服务模板
+Conditions:
+  CreateVpcConditions:
+    Fn::Equals:
+      - NewVPC
+      - Ref: VpcOption
 Parameters:
+  VpcOption:
+    Type: String
+    AllowedValues:
+      - NewVPC
+      - ExistingVPC
+    AssociationPropertyMetadata:
+      ValueLabelMapping:
+        NewVPC:
+          zh-cn: 新建专有网络
+          en: New VPC
+        ExistingVPC:
+          zh-cn: 已有专有网络
+          en: Existing VPC
+    Label:
+      en: Select Existing or New VPC
+      zh-cn: 选择已有/新建的专有网络
+    Required: true
+    Default: NewVPC
+  VpcCidrBlock:
+    Type: String
+    Label:
+      en: VPC CIDR IPv4 Block
+      zh-cn: 专有网络IPv4网段
+    Description:
+      zh-cn: VPC的ip地址段范围，<br>您可以使用以下的ip地址段或其子网:<br><font color='green'>[10.0.0.0/8]</font><br><font color='green'>[172.16.0.0/12]</font><br><font color='green'>[192.168.0.0/16]</font>
+      en: 'The ip address range of the VPC in the CidrBlock form; <br>You can use the following ip address ranges and their subnets: <br><font color=''green''>[10.0.0.0/8]</font><br><font color=''green''>[172.16.0.0/12]</font><br><font color=''green''>[192.168.0.0/16]</font>'
+    Default: 192.168.0.0/16
+    Required:
+      Fn::Equals:
+        - NewVPC
+        - ${VpcOption}
+    AssociationProperty: ALIYUN::VPC::VPC::CidrBlock
+    AssociationPropertyMetadata:
+      Visible:
+        Condition:
+          Fn::Equals:
+            - NewVPC
+            - ${VpcOption}
+  VSwitchCidrBlock:
+    Type: String
+    Label:
+      en: VSwitch CIDR Block
+      zh-cn: 交换机子网网段
+    Description:
+      zh-cn: 必须属于VPC的子网段。
+      en: Must belong to the subnet segment of VPC.
+    Default: 192.168.1.0/24
+    Required:
+      Fn::Equals:
+        - NewVPC
+        - ${VpcOption}
+    AssociationProperty: ALIYUN::VPC::VSwitch::CidrBlock
+    AssociationPropertyMetadata:
+      VpcCidrBlock: VpcCidrBlock
+      Visible:
+        Condition:
+          Fn::Equals:
+            - NewVPC
+            - ${VpcOption}
   PayType:
     Type: String
     Label:
@@ -96,6 +160,17 @@ Parameters:
       en: VPC ID
       zh-cn: 专有网络VPC实例ID
     AssociationProperty: 'ALIYUN::ECS::VPC::VPCId'
+    Required:
+      Fn::Equals:
+        - ExistingVPC
+        - ${VpcOption}
+    Default: ''
+    AssociationPropertyMetadata:
+      Visible:
+        Condition:
+          Fn::Equals:
+            - ExistingVPC
+            - ${VpcOption}
   VSwitchId:
     Type: String
     Label:
@@ -103,17 +178,56 @@ Parameters:
       zh-cn: 交换机实例ID
     Default: ''
     AssociationProperty: 'ALIYUN::ECS::VSwitch::VSwitchId'
+    Required:
+      Fn::Equals:
+        - ExistingVPC
+        - ${VpcOption}
     AssociationPropertyMetadata:
       VpcId: VpcId
       ZoneId: ZoneId
+      Visible:
+        Condition:
+          Fn::Equals:
+            - ExistingVPC
+            - ${VpcOption}
+  Password:
+    Type: String
+    AssociationProperty: ALIYUN::ECS::Instance::Password
+    Label: 密码
+    NoEcho: True
 Resources:
+  # 新建vpc
+  EcsVpc:
+    Type: ALIYUN::ECS::VPC
+    Condition: CreateVpcConditions
+    Properties:
+      VpcName:
+        Ref: ALIYUN::StackName
+      CidrBlock:
+        Ref: VpcCidrBlock
+  # 新建vswitch
+  EcsVSwitch:
+    Condition: CreateVpcConditions
+    Type: ALIYUN::ECS::VSwitch
+    Properties:
+      VSwitchName:
+        Ref: ALIYUN::StackName
+      VpcId:
+        Ref: EcsVpc
+      ZoneId:
+        Ref: ZoneId
+      CidrBlock:
+        Ref: VSwitchCidrBlock
   SecurityGroup:
     Type: ALIYUN::ECS::SecurityGroup
     Properties:
       SecurityGroupName:
         Ref: ALIYUN::StackName
       VpcId:
-        Ref: VpcId
+        Fn::If:
+          - CreateVpcConditions
+          - Ref: EcsVpc
+          - Ref: VpcId
       SecurityGroupIngress:
         - PortRange: 3210/3210
           Priority: 1
@@ -131,14 +245,20 @@ Resources:
       Period:
         Ref: PayPeriod
       VpcId:
-        Ref: VpcId
+        Fn::If:
+          - CreateVpcConditions
+          - Ref: EcsVpc
+          - Ref: VpcId
       VSwitchId:
-        Ref: VSwitchId
+        'Fn::If':
+          - CreateVpcConditions
+          - Ref: EcsVSwitch
+          - Ref: VSwitchId
       ZoneId:
         Ref: ZoneId
       SecurityGroupId:
         Ref: SecurityGroup
-      ImageId: centos_7_9_x64_20G_alibase_20240403.vhd
+      ImageId: "{{resolve:oos:aliyun/services/computenest/images/aliyun_3_2104_docker_compose_2_27_compute_nest}}"
       Password:
         Ref: InstancePassword
       InstanceType:
@@ -161,28 +281,6 @@ Resources:
       CommandContent:
         Fn::Sub:
           - |
-            yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
-            yum makecache fast
-            yum -y install docker-ce jq
-            mkdir -p /etc/docker
-            tee /etc/docker/daemon.json <<-'EOF'
-            {
-                "registry-mirrors": [
-                    "https://docker.m.daocloud.io",
-                    "https://mirror.baidubce.com",
-                    "https://dockerproxy.com",
-                    "https://mirror.iscas.ac.cn",
-                    "https://huecker.io",
-                    "https://dockerhub.timeweb.cloud",
-                    "https://noohub.ru",
-                    "https://vlgh0kqj.mirror.aliyuncs.com"
-                ]
-            }
-            EOF
-            systemctl enable docker
-            systemctl start docker
-            sleep 10
-
             dockerJson='{{ computenest::acr::dockerconfigjson }}'
             decodeDockerJson=$(echo $dockerJson | base64 -d)
             host=$(echo $decodeDockerJson | jq '.auths' | jq 'keys' | jq .[0])
@@ -191,9 +289,8 @@ Resources:
             host=$(echo $host | tr -d '"')
             docker login $host --username=$username --password=$password
 
-            mkdir -p /home/admin/application
-            wget '{{ computenest::file::aliyun-computenest_quickstart-LobeChat-docker-compose }}' -O /home/admin/application/docker_compose.tar
-            tar -xvf /home/admin/application/docker_compose.tar -C /home/admin/application
+            wget '{{ computenest::file::aliyun-computenest_quickstart-LobeChat-docker-compose }}' -O /root/application/docker_compose.tar
+            tar -xvf /root/application/docker_compose.tar -C /root/application
 
             cat > /etc/systemd/system/docker-compose-app.service <<EOF
             [Unit]
@@ -204,7 +301,7 @@ Resources:
             [Service]
             Type=oneshot
             RemainAfterExit=yes
-            WorkingDirectory=/home/admin/application/docker_compose
+            WorkingDirectory=/root/application/docker_compose
             ExecStart=/usr/bin/docker compose -f docker-compose.yaml up -d
             ExecStop=/usr/bin/docker compose down
             TimeoutStartSec=0
@@ -213,16 +310,8 @@ Resources:
             WantedBy=multi-user.target
             EOF
 
-            # 在Docker Compose启动前执行此命令片段，命令中可以引用参数
-            echo "before docker compose starts"
-            
+            echo 'Password=${Password}' >> /root/application/docker_compose/.env
             systemctl start docker-compose-app
-            sleep 10
-            # 在Docker Compose启动后执行此命令片段，命令中可以引用参数
-            echo "after docker compose starts"
-            
-
-            ARGUS_VERSION=3.5.7 /bin/bash -c "$(curl -sS https://cms-agent-${RegionId}.oss-${RegionId}-internal.aliyuncs.com/Argus/agent_install_ecs-1.7.sh)" >> /root/install_cms_agent.log 2>&1
           - RegionId:
               Ref: ALIYUN::Region
 Outputs:
@@ -232,7 +321,7 @@ Outputs:
       zh-cn: 访问页面。
     Value:
       Fn::Sub:
-        - 'http://${ServerAddress}:3210'
+        - http://${ServerAddress}:3210
         - ServerAddress:
             Fn::Select:
             - 0
@@ -255,8 +344,16 @@ Metadata:
           default: 资源配置
       - Parameters:
           - ZoneId
+          - VpcOption
           - VpcId
           - VSwitchId
+          - VpcCidrBlock
+          - VSwitchCidrBlock
         Label:
           default: 可用区配置
+      - Parameters:
+          - Password
+        Label:
+          en: Software Configuration
+          zh-cn: 软件配置
       
