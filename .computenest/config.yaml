@@ -1,6 +1,14 @@
 Service:
   RegionId: cn-hangzhou
   DeployType: ros
+  OperationMetadata:
+    StatusOperationConfigs:
+      - TemplateName: '单机版'
+        SupportOperations:
+          - Start
+          - Stop
+          - Restart
+    SupportBackup: true
   DeployMetadata:
     SupplierDeployMetadata:
       FileArtifactRelation:
