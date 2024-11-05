@@ -195,6 +195,12 @@ Parameters:
     AssociationProperty: ALIYUN::ECS::Instance::Password
     Label: 密码
     NoEcho: True
+  Test:
+    Type: String
+    Label: 测试
+    AllowedValues:
+      - test
+      - test2
 Resources:
   # 新建vpc
   EcsVpc:
@@ -311,6 +317,7 @@ Resources:
             EOF
 
             echo 'Password=${Password}' >> /root/application/docker_compose/.env
+            echo 'Test=${Test}' >> /root/application/docker_compose/.env
             systemctl start docker-compose-app
           - RegionId:
               Ref: ALIYUN::Region
@@ -353,6 +360,7 @@ Metadata:
           default: 可用区配置
       - Parameters:
           - Password
+          - Test
         Label:
           en: Software Configuration
           zh-cn: 软件配置
