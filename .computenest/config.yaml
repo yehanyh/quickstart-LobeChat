@@ -12,7 +12,7 @@ Service:
   DeployMetadata:
     SupplierDeployMetadata:
       FileArtifactRelation:
-        '{{ computenest::file::aliyun-computenest_quickstart-LobeChat-docker-compose }}':
+        '{{ computenest::file::yehanyh_quickstart-LobeChat-docker-compose }}':
           ArtifactId: ${Artifact.Artifact_1.ArtifactId}
           ArtifactVersion: ${Artifact.Artifact_1.ArtifactVersion}
     TemplateConfigs:
@@ -30,7 +30,8 @@ Service:
 Artifact:
   Artifact_1:
     ArtifactType: File
-    ArtifactName: aliyun-computenest_quickstart-LobeChat-docker-compose
+    ArtifactName: yehanyh_quickstart-LobeChat-docker-compose
     ArtifactProperty:
       RegionId: cn-hangzhou
       Url: 'resources/artifact_resources/docker_compose.tar'
+AcrImageBuilder:
