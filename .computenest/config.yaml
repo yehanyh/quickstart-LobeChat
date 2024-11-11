@@ -36,7 +36,7 @@ Artifact:
       Url: 'resources/artifact_resources/docker_compose.tar'
   Artifact_2:
     ArtifactType: AcrImage
-    ArtifactName: lobehub-lobe-chat
+    ArtifactName: AcrImage-lobehub-lobe-chat
     ArtifactProperty:
       RepoName: ${AcrImageBuilder.AcrImage_1.RepoName}
       Tag: ${AcrImageBuilder.AcrImage_1.Tag}
